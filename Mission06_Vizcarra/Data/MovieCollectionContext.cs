@@ -8,7 +8,6 @@ namespace Mission06_Vizcarra.Data
         public MovieCollectionContext(DbContextOptions<MovieCollectionContext> options) : base(options) { }
 
         public DbSet<Movie> Movies { get; set; }
-        public DbSet<Rating> Ratings { get; set; }
     }
 }
 

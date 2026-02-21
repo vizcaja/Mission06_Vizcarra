@@ -1,0 +1,93 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Mission06_Vizcarra.Models.Movie
+
+@{
+    ViewData["Title"] = "Edit Movie";
+}
+
+<h2 class="mb-4">Edit Movie</h2>
+
+<form asp-action="Edit" method="post">
+
+    <!-- Show all validation errors at top -->
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <!-- Hidden ID so it knows what to update -->
+    <input type="hidden" asp-for="MovieId" />
+
+    <!-- Title -->
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <!-- Year -->
+    <div class="mb-3">
+        <label asp-for="Year" class="form-label"></label>
+        <input asp-for="Year" class="form-control" />
+        <span asp-validation-for="Year" class="text-danger"></span>
+    </div>
+
+    <!-- Director -->
+    <div class="mb-3">
+        <label asp-for="Director" class="form-label"></label>
+        <input asp-for="Director" class="form-control" />
+    </div>
+
+    <!-- Rating -->
+    <div class="mb-3">
+        <label asp-for="Rating" class="form-label"></label>
+        <input asp-for="Rating" class="form-control" />
+    </div>
+
+    <!-- Edited (Yes/No Dropdown) -->
+    <div class="mb-3">
+        <label asp-for="Edited" class="form-label"></label>
+        <select asp-for="Edited" class="form-select">
+            <option value="">-- Select One --</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+        <span asp-validation-for="Edited" class="text-danger"></span>
+    </div>
+
+    <!-- Lent To -->
+    <div class="mb-3">
+        <label asp-for="LentTo" class="form-label"></label>
+        <input asp-for="LentTo" class="form-control" />
+    </div>
+
+    <!-- Copied To Plex (Yes/No Dropdown) -->
+    <div class="mb-3">
+        <label asp-for="CopiedToPlex" class="form-label"></label>
+        <select asp-for="CopiedToPlex" class="form-select">
+            <option value="">-- Select One --</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+        <span asp-validation-for="CopiedToPlex" class="text-danger"></span>
+    </div>
+
+    <!-- Notes -->
+    <div class="mb-3">
+        <label asp-for="Notes" class="form-label"></label>
+        <textarea asp-for="Notes" class="form-control"></textarea>
+    </div>
+
+    <!-- Buttons -->
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

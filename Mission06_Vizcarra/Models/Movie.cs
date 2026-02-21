@@ -1,39 +1,50 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Mission06_Vizcarra.Models
+namespace Mission06_Vizcarra.Models;
+
+public partial class Movie
 {
-    public class Movie
-    {
-        public int MovieId { get; set; }
+    // Primary key (ID number)
+    public int MovieId { get; set; }
 
-        [Required]
-        public string Category { get; set; } = string.Empty;
+    // Foreign key to Category table
+    public int? CategoryId { get; set; }
 
-        [Required]
-        public string Title { get; set; } = string.Empty;
+    // =============================
+    // REQUIRED FIELDS (Mission 7)
+    // =============================
 
-        [Required]
-        [Range(1888, 2100)]
-        public int Year { get; set; }
+    // Title MUST be entered
+    [Required(ErrorMessage = "Please enter a movie title")]
+    public string Title { get; set; } = null!;
 
-        [Required]
-        public string Director { get; set; } = string.Empty;
+    // Year MUST be entered AND be 1888 or later
+    [Required(ErrorMessage = "Please enter the year")]
+    [Range(1888, 3000, ErrorMessage = "Year must be 1888 or later")]
+    public int Year { get; set; }
 
-        // Required rating via FK
-        [Required]
-        public int RatingId { get; set; }
-        public Rating? Rating { get; set; }
+    // Edited MUST be selected
+    [Required(ErrorMessage = "Please select if the movie was edited")]
+    public int Edited { get; set; }
 
-        // Required yes/no
-        [Required]
-        public bool Edited { get; set; }
+    // CopiedToPlex MUST be selected
+    [Required(ErrorMessage = "Please select if copied to Plex")]
+    public int CopiedToPlex { get; set; }
 
-        // Not required
-        public string? LentTo { get; set; }
+    // =============================
+    // OPTIONAL FIELDS
+    // =============================
 
-        // Not required + 25 char max
-        [MaxLength(25)]
-        public string? Notes { get; set; }
-    }
+    public string? Director { get; set; }
+
+    public string? Rating { get; set; }
+
+    public string? LentTo { get; set; }
+
+    public string? Notes { get; set; }
+
+    // Navigation property
+    public virtual Category? Category { get; set; }
 }
-
